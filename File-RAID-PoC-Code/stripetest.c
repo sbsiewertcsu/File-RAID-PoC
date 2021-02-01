@@ -25,6 +25,8 @@ int main(int argc, char *argv[])
     }
   
     // What is the meaning of the "0" argument here? 
+    // This is an offset in sectors that is not actually used at all in raidlib.c, so we might
+    // want to depricate this argument.
     bytesWritten=stripeFile(argv[1], 0); 
 
     printf("%s input file was written as 4 data chunks + 1 XOR parity on 5 devices 1...5\n", argv[1]);
