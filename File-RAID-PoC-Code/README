@@ -1,0 +1,2 @@
+The stripetest should XOR encode the file into chunks and the read it back, recovering data
+from any lost chunk if necessary, but only 1 in the worst case.

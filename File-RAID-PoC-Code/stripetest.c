@@ -8,7 +8,8 @@ int main(int argc, char *argv[])
     int bytesWritten, bytesRestored;
     char rc;
 
-    // zero default for no chunk erased
+    // For testing, if no data is lost (erased), then the zero default
+    // indicates that no data chunk was lost.
     int chunkToRebuild=0;
 
     if(argc < 3)
@@ -22,7 +23,8 @@ int main(int argc, char *argv[])
 	sscanf(argv[3], "%d", &chunkToRebuild);
         printf("chunk to restore = %d\n", chunkToRebuild);
     }
-   
+  
+    // What is the meaning of the "0" argument here? 
     bytesWritten=stripeFile(argv[1], 0); 
 
     printf("%s input file was written as 4 data chunks + 1 XOR parity on 5 devices 1...5\n", argv[1]);
@@ -35,11 +37,15 @@ int main(int argc, char *argv[])
     {
         printf("Will rebuild StripeChunk%1d.bin\n", chunkToRebuild);
         printf("working on restoring file ...\n");
+
+        // What is the meaning of the "0" argument here? 
         bytesRestored=restoreFile(argv[2], 0, bytesWritten, chunkToRebuild); 
     }
     else
     {
         printf("Nothing erased, so nothing to restore\n");
+        // What is the meaning of the first "0" argument and the second zero here? 
+        bytesRestored=restoreFile(argv[2], 0, bytesWritten, 0); 
     }
 
     printf("FINISHED\n");
